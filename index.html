@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Grimorio delle Memorie | Diario Fantasy Personale</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+</head>
+<body>
+
+    <!-- Particelle dorate di polvere magica fluttuante -->
+    <div class="ambient-dust" id="ambientDust"></div>
+
+    <!-- Barra Superiore dello Scrigno -->
+    <header class="grimoire-header">
+        <div class="header-title-group">
+            <span class="tome-emblem">📖</span>
+            <div>
+                <h1 class="grimoire-title">Il Grimorio delle Memorie</h1>
+                <div class="grimoire-subtitle">Cronache & Pensieri dell'Anima</div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button id="btnAmbience" class="btn-header" title="Accendi o spegni il camino della stanza">
+                🕯️ Atmosfera
+            </button>
+            <button id="btnIndex" class="btn-header" title="Consulta tutti i capitoli e le pagine scritte">
+                📜 Indice Pagine
+            </button>
+            <button id="btnPrint" class="btn-header" title="Stampa o salva come PDF il tuo diario">
+                🖨️ Stampa / PDF
+            </button>
+            <button id="btnSettings" class="btn-header" title="Configura la Chiave di Gemini e i Rituali Magici">
+                ⚙️ Gemini & Rituali
+            </button>
+        </div>
+    </header>
+
+    <!-- Palcoscenico 3D del Libro Fantasy -->
+    <main class="grimoire-stage">
+        <div class="book-wrapper">
+            <!-- Copertina esterna in cuoio e finiture in ottone -->
+            <div class="book-cover"></div>
+            <div class="corner-ornament corner-top-left"></div>
+            <div class="corner-ornament corner-top-right"></div>
+            <div class="corner-ornament corner-bottom-left"></div>
+            <div class="corner-ornament corner-bottom-right"></div>
+
+            <!-- Nastro segnalibro in velluto rosso -->
+            <div class="bookmark-ribbon" title="Il Segnalibro Reale"></div>
+
+            <!-- Selettore schede per schermi piccoli / smartphone -->
+            <div class="mobile-tabs-bar" id="mobileTabsBar">
+                <button type="button" id="tabWrite" class="mobile-tab-btn active">✍️ Scrittura</button>
+                <button type="button" id="tabSpirit" class="mobile-tab-btn">🔮 Spirito & Memorie</button>
+            </div>
+
+            <!-- Contenitore delle pagine in pergamena antica / tavoletta astrale -->
+            <div class="book-pages-container" id="bookPagesContainer">
+                
+                <!-- PAGINA SINISTRA: Spirito Custode & Memorie Recenti -->
+                <div class="page page-left">
+                    <div class="page-header">
+                        <div class="page-header-row">
+                            <div class="page-date-display">Spirito del Diario</div>
+                            <div class="page-number-seal">Riflessi</div>
+                        </div>
+                    </div>
+
+                    <div class="left-page-content">
+                        <!-- Pannello dello Spirito Custode / AI -->
+                        <div class="guardian-panel" id="guardianPanel">
+                            <div class="guardian-header">
+                                <span class="guardian-name" id="guardianName">🕯️ Il Custode del Diario</span>
+                                <span class="guardian-badge" id="guardianBadge">In ascolto</span>
+                            </div>
+                            <div class="guardian-message-body" id="guardianMessage">
+                                <p>Benvenuto, viandante. Questo tomo custodisce i tuoi segreti più sinceri. Parla o scrivi: io sarò qui ad accogliere ogni tua confessione.</p>
+                            </div>
+                        </div>
+
+                        <!-- Lista delle ultime pergamene sfogliate -->
+                        <div class="quick-notes-section">
+                            <div class="section-title">
+                                <span>📜</span> Ultime Memorie
+                            </div>
+                            <ul class="memories-list" id="memoriesList">
+                                <!-- Popolato dinamicamente da app.js -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DORSO CENTRALE DEL LIBRO (Cuciture & Legatura) -->
+                <div class="book-spine">
+                    <div class="spine-stitch"></div>
+                    <div class="spine-stitch"></div>
+                    <div class="spine-stitch"></div>
+                    <div class="spine-stitch"></div>
+                    <div class="spine-stitch"></div>
+                </div>
+
+                <!-- PAGINA DESTRA: Foglio di Scrittura Principale -->
+                <div class="page page-right">
+                    <div class="page-header">
+                        <div class="page-header-row">
+                            <div class="page-date-display" id="pageDate">Giorno d'Autunno</div>
+                            <div class="page-number-seal" id="pageNumber">Pagina 1 di 1</div>
+                        </div>
+                        <div class="page-header-subrow">
+                            <div class="mood-selector">
+                                <span>Clima:</span>
+                                <select id="moodSelect" title="Stato d'animo interiore">
+                                    <option value="✨ Magico">✨ Magico</option>
+                                    <option value="🕯️ Riflessivo">🕯️ Riflessivo</option>
+                                    <option value="☀️ Radioso">☀️ Radioso</option>
+                                    <option value="🌧️ Malinconico">🌧️ Malinconico</option>
+                                    <option value="⚔️ Epico">⚔️ Epico</option>
+                                    <option value="🌿 Calmo & Sereno">🌿 Calmo & Sereno</option>
+                                    <option value="⛈️ Tempesta d'Animo">⛈️ Tempesta</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Titolo della pagina -->
+                    <input type="text" id="pageTitle" class="page-title-input" placeholder="Intitola questa pagina..." autocomplete="off">
+
+                    <!-- Area del testo della pergamena -->
+                    <div class="entry-scroll-area">
+                        <textarea id="pageContent" class="page-text-area" placeholder="Intingi il calamaio e scrivi i tuoi pensieri, oppure premi il microfono in basso per parlare ad alta voce..."></textarea>
+                    </div>
+
+                    <!-- Piè di pagina -->
+                    <div class="page-footer-bar">
+                        <div class="page-save-indicator" id="saveStatus">
+                            <span class="save-dot"></span> Inchiostro asciutto
+                        </div>
+                        <div id="wordCount">0 parole | 0 caratteri</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- BANCO DI SCRITTURA & RITUALI (DESK TRAY INFERIORE) -->
+    <footer class="writing-desk-tray">
+        <div class="desk-console">
+
+            <!-- Banner di ascolto vocale animato -->
+            <div class="listening-banner" id="listeningBanner">
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <span id="listeningText">In ascolto dei tuoi pensieri... Parla pure.</span>
+            </div>
+
+            <!-- Riga di input: Dettatura vocale & Digitazione -->
+            <div class="input-row">
+                <button id="btnMic" class="btn-mic-magic" title="Attiva/Disattiva Microfono per parlare">
+                    🎙️
+                </button>
+                <div class="prompt-input-wrapper">
+                    <input type="text" id="promptInput" class="prompt-input" placeholder="Detta al microfono o scrivi qui un pensiero, una confidenza o un aneddoto...">
+                </div>
+            </div>
+
+            <!-- Riga delle azioni, spiriti guida e cambio pagina -->
+            <div class="actions-row">
+                <div class="persona-quick-selector">
+                    <span>Voce Guida:</span>
+                    <select id="personaQuickSelect" class="persona-select" title="Scegli la personalità di Gemini"></select>
+                </div>
+
+                <div class="action-buttons-group">
+                    <button id="btnAddDirect" class="btn-seal" title="Scrivi direttamente il testo sulla pagina">
+                        ✍️ Scrivi di getto
+                    </button>
+                    <button id="btnGeminiWeave" class="btn-seal btn-seal-gemini" title="Invia a Gemini con il rituale e persona selezionata">
+                        ✨ Parla con Gemini
+                    </button>
+                </div>
+
+                <div class="page-navigation-group">
+                    <button id="btnPrevPage" class="btn-nav-page" title="Pagina precedente">◀ Indietro</button>
+                    <span id="pageIndicator" style="font-family:var(--font-subhead); font-size:0.85rem; color:#d4af37; padding:0 4px;">1 / 1</span>
+                    <button id="btnNextPage" class="btn-nav-page" title="Pagina successiva">Avanti ▶</button>
+                    <button id="btnNewPage" class="btn-seal" style="background:#422615; border-color:#d4af37; padding:6px 12px;" title="Crea e volta a una nuova pagina intonsa">
+                        📖 Volta Pagina
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+         MODALE 1: IMPOSTAZIONI GEMINI & RITUALI PERSONALIZZATI
+         ========================================================================== -->
+    <div class="modal-backdrop" id="settingsModal">
+        <div class="modal-scroll">
+            <div class="modal-header">
+                <h2 class="modal-title">⚙️ Connessione con Gemini & Rituali</h2>
+                <button class="btn-close-modal" title="Chiudi">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label" for="apiKeyInput">Chiave Arcana (Gemini API Key):</label>
+                    <input type="password" id="apiKeyInput" class="form-input" placeholder="Incolla qui la tua API Key di Google Gemini...">
+                    <div class="form-hint">
+                        Puoi ottenere una chiave gratuita in pochi secondi su <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#783b16; font-weight:bold; text-decoration:underline;">Google AI Studio</a>. La chiave rimane salvata solo nel tuo browser.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="modelSelect">Modello di Gemini:</label>
+                    <select id="modelSelect" class="form-select">
+                        <option value="gemini-1.5-flash">Gemini 1.5 Flash (Veloce, creativo & gratuito)</option>
+                        <option value="gemini-2.0-flash">Gemini 2.0 Flash (Nuova generazione ultrarapida)</option>
+                        <option value="gemini-1.5-pro">Gemini 1.5 Pro (Massima profondità e riflessione)</option>
+                    </select>
+                </div>
+
+                <hr style="border:0; border-top:1px dashed #bda272; margin:6px 0;">
+
+                <div class="form-group">
+                    <label class="form-label">Rituali & Spiriti Disponibili:</label>
+                    <div class="prompt-list-container" id="promptsList">
+                        <!-- Popolato dinamicamente da app.js -->
+                    </div>
+                </div>
+
+                <hr style="border:0; border-top:1px dashed #bda272; margin:6px 0;">
+
+                <!-- Crea Rituale Personalizzato -->
+                <div class="form-group">
+                    <label class="form-label">Crea un Nuovo Rituale / Prompt Personalizzato:</label>
+                    <input type="text" id="newPromptName" class="form-input" placeholder="Nome (es. Confidente Poetico, Filosofo Zen...)" style="margin-bottom:8px;">
+                    <textarea id="newPromptText" class="form-textarea" rows="3" placeholder="Istruzioni per Gemini (es: 'Sei il mio saggio consigliere, rispondi con una breve poesia in rima baciata e una parola di conforto...')"></textarea>
+                    <div style="display:flex; justify-content:flex-end; margin-top:8px;">
+                        <button id="btnAddPrompt" class="btn-seal" style="padding:6px 14px; font-size:0.85rem;">
+                            ✨ Salva Nuovo Rituale
+                        </button>
+                    </div>
+                </div>
+
+                <hr style="border:0; border-top:1px dashed #bda272; margin:6px 0;">
+
+                <!-- Salvaguardia Memorie (Backup / Restore) -->
+                <div class="form-group">
+                    <label class="form-label">Custodia delle Memorie (Backup & Ripristino):</label>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <button id="btnExportJson" class="btn-seal" style="font-size:0.8rem; padding:6px 12px;" type="button">
+                            💾 Esporta Diario (JSON)
+                        </button>
+                        <button id="btnExportMd" class="btn-seal" style="font-size:0.8rem; padding:6px 12px;" type="button">
+                            📜 Esporta in Markdown (.md)
+                        </button>
+                        <button id="btnImportJson" class="btn-seal" style="font-size:0.8rem; padding:6px 12px;" type="button">
+                            📥 Ripristina Backup
+                        </button>
+                        <input type="file" id="importFileInput" accept=".json" style="display:none;">
+                    </div>
+                    <div class="form-hint">I tuoi dati sono conservati sul tuo dispositivo. Esporta regolarmente una copia di sicurezza delle tue cronache.</div>
+                </div>
+
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:10px;">
+                    <button id="btnSaveSettings" class="btn-seal" style="background:#28572b; border-color:#5ca862; padding:10px 20px;">
+                        ✓ Salva Impostazioni
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         MODALE 2: INDICE GENERALE DELLE MEMORIE
+         ========================================================================== -->
+    <div class="modal-backdrop" id="indexModal">
+        <div class="modal-scroll">
+            <div class="modal-header">
+                <h2 class="modal-title">📜 Indice Generale del Grimorio</h2>
+                <button class="btn-close-modal" title="Chiudi">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" id="indexSearch" class="form-input" placeholder="🔍 Cerca tra le pagine, date, parole chiave o stati d'animo...">
+                </div>
+
+                <div class="prompt-list-container" id="indexTableList" style="max-height:380px;">
+                    <!-- Popolato dinamicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenitore Notifiche Toast -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Script modulari -->
+    <script src="audio.js"></script>
+    <script src="speech.js"></script>
+    <script src="gemini.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
