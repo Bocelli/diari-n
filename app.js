@@ -159,7 +159,7 @@ class FantasyDiaryApp {
         }
 
         this.dom.pageDate.textContent = page.date || this.formatDate(new Date());
-        this.dom.pageNumber.textContent = `Pagina ${this.currentPageIndex + 1} di ${this.pages.length}`;
+        this.dom.pageNumber.textContent = `FOLIO ${this.currentPageIndex + 1} DI ${this.pages.length}`;
         this.dom.pageIndicator.textContent = `${this.currentPageIndex + 1} / ${this.pages.length}`;
         this.dom.pageTitle.value = page.title || '';
         this.dom.pageContent.value = page.content || '';
@@ -168,12 +168,12 @@ class FantasyDiaryApp {
         // Aggiorna pannello sinistro (Custode & Note)
         if (page.guardianNote) {
             this.dom.guardianMessage.innerHTML = `<p>${page.guardianNote.replace(/\n/g, '<br>')}</p>`;
-            this.dom.guardianName.innerHTML = `📜 ${page.guardianPersona || 'Spirito Guida'}`;
+            this.dom.guardianName.innerHTML = `<span>${page.guardianPersona || 'Spirito Guida'}</span>`;
             this.dom.guardianBadge.textContent = 'Trascrizione';
         } else {
-            this.dom.guardianMessage.innerHTML = `<p>Questa pagina attende ancora le tue parole o l'intervento dello spirito guida.</p>`;
-            this.dom.guardianName.innerHTML = `🕯️ Il Custode del Diario`;
-            this.dom.guardianBadge.textContent = 'In attesa';
+            this.dom.guardianMessage.innerHTML = `<p>Questa pagina attende ancora le tue parole o l'intervento dell'oracolo astrale.</p>`;
+            this.dom.guardianName.innerHTML = `<span>Il Custode Astrale</span>`;
+            this.dom.guardianBadge.textContent = 'In ascolto';
         }
 
         this.updateWordCount();
@@ -192,16 +192,16 @@ class FantasyDiaryApp {
         this.dom.wordCount.textContent = `${words} parole | ${text.length} caratteri`;
     }
 
-    showSaveIndicator(msg = 'Salvato') {
-        this.dom.saveStatus.innerHTML = `<span class="save-dot"></span> ${msg}`;
+    showSaveIndicator(msg = 'Sincronizzato') {
+        this.dom.saveStatus.innerHTML = `<span class="save-dot" aria-hidden="true"></span> ${msg}`;
         setTimeout(() => {
-            this.dom.saveStatus.innerHTML = `<span class="save-dot"></span> Inchiostro asciutto`;
+            this.dom.saveStatus.innerHTML = `<span class="save-dot" aria-hidden="true"></span> Sincronizzato`;
         }, 2000);
     }
 
     triggerAutoSave() {
         clearTimeout(this.autoSaveTimer);
-        this.dom.saveStatus.innerHTML = `<span class="save-dot" style="background:#ffb74d; box-shadow:0 0 5px #ffb74d;"></span> Scrittura...`;
+        this.dom.saveStatus.innerHTML = `<span class="save-dot" style="background:#38bdf8; box-shadow:0 0 8px #38bdf8;" aria-hidden="true"></span> Salvataggio...`;
         this.autoSaveTimer = setTimeout(() => {
             const page = this.getCurrentPage();
             if (page) {

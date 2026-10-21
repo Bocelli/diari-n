@@ -2,99 +2,153 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Grimorio delle Memorie | Diario Fantasy Personale</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Il Grimorio delle Memorie | Modern Fantasy Journal</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2338bdf8%22 stroke-width=%222%22><path d=%22M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z%22/><path d=%22M6 2v20%22/></svg>">
 </head>
 <body>
 
-    <!-- Particelle dorate di polvere magica fluttuante -->
-    <div class="ambient-dust" id="ambientDust"></div>
+    <!-- Particelle dorate e stardust astrale -->
+    <div class="ambient-dust" id="ambientDust" aria-hidden="true"></div>
 
-    <!-- Barra Superiore dello Scrigno -->
-    <header class="grimoire-header">
+    <!-- Barra Superiore dello Scrigno (App Bar) -->
+    <header class="grimoire-header" role="banner">
         <div class="header-title-group">
-            <span class="tome-emblem">📖</span>
+            <div class="tome-emblem" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                    <path d="M6 2v20"/>
+                </svg>
+            </div>
             <div>
                 <h1 class="grimoire-title">Il Grimorio delle Memorie</h1>
-                <div class="grimoire-subtitle">Cronache & Pensieri dell'Anima</div>
+                <div class="grimoire-subtitle">Astral Magitech Journal</div>
             </div>
         </div>
 
-        <div class="header-actions">
-            <button id="btnAmbience" class="btn-header" title="Accendi o spegni il camino della stanza">
-                🕯️ Atmosfera
+        <nav class="header-actions" aria-label="Strumenti rapidi">
+            <button id="btnAmbience" class="btn-header" type="button" aria-label="Attiva o disattiva il fuoco rilassante" title="Atmosfera del Focolare">
+                <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+                </svg>
+                <span class="btn-header-text">Atmosfera</span>
             </button>
-            <button id="btnIndex" class="btn-header" title="Consulta tutti i capitoli e le pagine scritte">
-                📜 Indice Pagine
+
+            <button id="btnIndex" class="btn-header" type="button" aria-label="Consulta tutti i capitoli e le pagine scritte" title="Indice Pagine">
+                <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 6h18"/>
+                    <path d="M7 12h10"/>
+                    <path d="M10 18h4"/>
+                </svg>
+                <span class="btn-header-text">Indice</span>
             </button>
-            <button id="btnPrint" class="btn-header" title="Stampa o salva come PDF il tuo diario">
-                🖨️ Stampa / PDF
+
+            <button id="btnPrint" class="btn-header" type="button" aria-label="Stampa o salva in PDF" title="Stampa o esporta PDF">
+                <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 9V2h12v7"/>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                    <path d="M6 14h12v8H6z"/>
+                </svg>
+                <span class="btn-header-text">PDF / Stampa</span>
             </button>
-            <button id="btnSettings" class="btn-header" title="Configura la Chiave di Gemini e i Rituali Magici">
-                ⚙️ Gemini & Rituali
+
+            <button id="btnSettings" class="btn-header" type="button" aria-label="Configura la Chiave di Gemini e i Rituali Magici" title="Impostazioni Gemini">
+                <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <span class="btn-header-text">Gemini</span>
             </button>
-        </div>
+        </nav>
     </header>
 
-    <!-- Palcoscenico 3D del Libro Fantasy -->
-    <main class="grimoire-stage">
+    <!-- PALCOSCENICO PRINCIPALE: GRIMORIO ASTRALE -->
+    <main class="grimoire-stage" role="main">
         <div class="book-wrapper">
-            <!-- Copertina esterna in cuoio e finiture in ottone -->
-            <div class="book-cover"></div>
-            <div class="corner-ornament corner-top-left"></div>
-            <div class="corner-ornament corner-top-right"></div>
-            <div class="corner-ornament corner-bottom-left"></div>
-            <div class="corner-ornament corner-bottom-right"></div>
+            <!-- Rivestimento esterno in vetro satinato e bordi al neon -->
+            <div class="book-cover" aria-hidden="true"></div>
+            <div class="corner-ornament corner-top-left" aria-hidden="true"></div>
+            <div class="corner-ornament corner-top-right" aria-hidden="true"></div>
+            <div class="corner-ornament corner-bottom-left" aria-hidden="true"></div>
+            <div class="corner-ornament corner-bottom-right" aria-hidden="true"></div>
 
-            <!-- Nastro segnalibro in velluto rosso -->
-            <div class="bookmark-ribbon" title="Il Segnalibro Reale"></div>
+            <!-- Nastro segnalibro olografico -->
+            <div class="bookmark-ribbon" title="Segnalibro Astrale" aria-hidden="true"></div>
 
-            <!-- Selettore schede per schermi piccoli / smartphone -->
-            <div class="mobile-tabs-bar" id="mobileTabsBar">
-                <button type="button" id="tabWrite" class="mobile-tab-btn active">✍️ Scrittura</button>
-                <button type="button" id="tabSpirit" class="mobile-tab-btn">🔮 Spirito & Memorie</button>
+            <!-- Selettore schede per smartphone / tablet -->
+            <div class="mobile-tabs-bar" id="mobileTabsBar" role="tablist" aria-label="Sezioni del diario">
+                <button type="button" id="tabWrite" class="mobile-tab-btn active" role="tab" aria-selected="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                        <path d="m15 5 4 4"/>
+                    </svg>
+                    <span>Scrittura</span>
+                </button>
+                <button type="button" id="tabSpirit" class="mobile-tab-btn" role="tab" aria-selected="false">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m15 4-2 4 4-2-4-2Z"/>
+                        <path d="m20 9-1.5 2.5 2.5-1.5-2.5-1.5Z"/>
+                        <path d="m18 15-1.5 2.5 2.5-1.5-2.5-1.5Z"/>
+                        <path d="M4 20l10-10"/>
+                    </svg>
+                    <span>Spirito & Memorie</span>
+                </button>
             </div>
 
-            <!-- Contenitore delle pagine in pergamena antica / tavoletta astrale -->
+            <!-- Contenitore delle pagine (Astral Folios) -->
             <div class="book-pages-container" id="bookPagesContainer">
                 
                 <!-- PAGINA SINISTRA: Spirito Custode & Memorie Recenti -->
-                <div class="page page-left">
+                <section class="page page-left" aria-label="Spirito custode e memorie">
                     <div class="page-header">
                         <div class="page-header-row">
-                            <div class="page-date-display">Spirito del Diario</div>
-                            <div class="page-number-seal">Riflessi</div>
+                            <div class="page-date-display">
+                                <svg class="inline-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                                <span>Spirito del Diario</span>
+                            </div>
+                            <div class="page-number-seal">RIFLESSI</div>
                         </div>
                     </div>
 
                     <div class="left-page-content">
-                        <!-- Pannello dello Spirito Custode / AI -->
+                        <!-- Scheda Oracolo / Custode AI -->
                         <div class="guardian-panel" id="guardianPanel">
                             <div class="guardian-header">
-                                <span class="guardian-name" id="guardianName">🕯️ Il Custode del Diario</span>
+                                <span class="guardian-name" id="guardianName">
+                                    <svg class="inline-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                    </svg>
+                                    <span>Il Custode Astrale</span>
+                                </span>
                                 <span class="guardian-badge" id="guardianBadge">In ascolto</span>
                             </div>
                             <div class="guardian-message-body" id="guardianMessage">
-                                <p>Benvenuto, viandante. Questo tomo custodisce i tuoi segreti più sinceri. Parla o scrivi: io sarò qui ad accogliere ogni tua confessione.</p>
+                                <p>Benvenuto, viaggiatore dello spirito. Questo grimorio accoglie i tuoi pensieri e le tue confessioni. Detta a voce o scrivi: io sarò qui a custodire ogni parola.</p>
                             </div>
                         </div>
 
-                        <!-- Lista delle ultime pergamene sfogliate -->
+                        <!-- Lista delle memorie recenti -->
                         <div class="quick-notes-section">
                             <div class="section-title">
-                                <span>📜</span> Ultime Memorie
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                                <span>Cronache Recenti</span>
                             </div>
                             <ul class="memories-list" id="memoriesList">
                                 <!-- Popolato dinamicamente da app.js -->
                             </ul>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- DORSO CENTRALE DEL LIBRO (Cuciture & Legatura) -->
-                <div class="book-spine">
+                <!-- CANALE DI MANA CENTRALE (Dorso del libro) -->
+                <div class="book-spine" aria-hidden="true">
                     <div class="spine-stitch"></div>
                     <div class="spine-stitch"></div>
                     <div class="spine-stitch"></div>
@@ -103,16 +157,16 @@
                 </div>
 
                 <!-- PAGINA DESTRA: Foglio di Scrittura Principale -->
-                <div class="page page-right">
+                <section class="page page-right" aria-label="Foglio di scrittura attivo">
                     <div class="page-header">
                         <div class="page-header-row">
                             <div class="page-date-display" id="pageDate">Giorno d'Autunno</div>
-                            <div class="page-number-seal" id="pageNumber">Pagina 1 di 1</div>
+                            <div class="page-number-seal" id="pageNumber">FOLIO 1 DI 1</div>
                         </div>
                         <div class="page-header-subrow">
                             <div class="mood-selector">
-                                <span>Clima:</span>
-                                <select id="moodSelect" title="Stato d'animo interiore">
+                                <span class="mood-label">CLIMA:</span>
+                                <select id="moodSelect" title="Stato d'animo interiore" aria-label="Seleziona lo stato d'animo interiore">
                                     <option value="✨ Magico">✨ Magico</option>
                                     <option value="🕯️ Riflessivo">🕯️ Riflessivo</option>
                                     <option value="☀️ Radioso">☀️ Radioso</option>
@@ -126,71 +180,102 @@
                     </div>
 
                     <!-- Titolo della pagina -->
-                    <input type="text" id="pageTitle" class="page-title-input" placeholder="Intitola questa pagina..." autocomplete="off">
+                    <input type="text" id="pageTitle" class="page-title-input" placeholder="Intitola questa pagina..." autocomplete="off" aria-label="Titolo della pagina">
 
-                    <!-- Area del testo della pergamena -->
+                    <!-- Area del testo -->
                     <div class="entry-scroll-area">
-                        <textarea id="pageContent" class="page-text-area" placeholder="Intingi il calamaio e scrivi i tuoi pensieri, oppure premi il microfono in basso per parlare ad alta voce..."></textarea>
+                        <textarea id="pageContent" class="page-text-area" placeholder="Scrivi liberamente i tuoi pensieri o premi il cristallo vocale in basso per parlare ad alta voce..." aria-label="Contenuto della pagina del diario"></textarea>
                     </div>
 
-                    <!-- Piè di pagina -->
+                    <!-- Piè di pagina informativo -->
                     <div class="page-footer-bar">
-                        <div class="page-save-indicator" id="saveStatus">
-                            <span class="save-dot"></span> Inchiostro asciutto
+                        <div class="page-save-indicator" id="saveStatus" aria-live="polite">
+                            <span class="save-dot" aria-hidden="true"></span> Sincronizzato
                         </div>
                         <div id="wordCount">0 parole | 0 caratteri</div>
                     </div>
-                </div>
+                </section>
 
             </div>
         </div>
     </main>
 
     <!-- BANCO DI SCRITTURA & RITUALI (DESK TRAY INFERIORE) -->
-    <footer class="writing-desk-tray">
+    <footer class="writing-desk-tray" role="region" aria-label="Barra comandi di scrittura">
         <div class="desk-console">
 
             <!-- Banner di ascolto vocale animato -->
-            <div class="listening-banner" id="listeningBanner">
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
+            <div class="listening-banner" id="listeningBanner" aria-live="assertive">
+                <div class="wave-bar" aria-hidden="true"></div>
+                <div class="wave-bar" aria-hidden="true"></div>
+                <div class="wave-bar" aria-hidden="true"></div>
+                <div class="wave-bar" aria-hidden="true"></div>
                 <span id="listeningText">In ascolto dei tuoi pensieri... Parla pure.</span>
             </div>
 
             <!-- Riga di input: Dettatura vocale & Digitazione -->
             <div class="input-row">
-                <button id="btnMic" class="btn-mic-magic" title="Attiva/Disattiva Microfono per parlare">
-                    🎙️
+                <button id="btnMic" class="btn-mic-magic" type="button" title="Attiva/Disattiva Microfono per parlare" aria-label="Attiva dettatura vocale tramite microfono">
+                    <svg class="mic-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" x2="12" y1="19" y2="22"/>
+                    </svg>
                 </button>
                 <div class="prompt-input-wrapper">
-                    <input type="text" id="promptInput" class="prompt-input" placeholder="Detta al microfono o scrivi qui un pensiero, una confidenza o un aneddoto...">
+                    <input type="text" id="promptInput" class="prompt-input" placeholder="Detta al microfono o scrivi qui un pensiero..." aria-label="Scrivi o detta un pensiero">
                 </div>
             </div>
 
             <!-- Riga delle azioni, spiriti guida e cambio pagina -->
             <div class="actions-row">
                 <div class="persona-quick-selector">
-                    <span>Voce Guida:</span>
-                    <select id="personaQuickSelect" class="persona-select" title="Scegli la personalità di Gemini"></select>
+                    <span>Voce:</span>
+                    <select id="personaQuickSelect" class="persona-select" title="Scegli la personalità di Gemini" aria-label="Scegli la personalità di Gemini"></select>
                 </div>
 
                 <div class="action-buttons-group">
-                    <button id="btnAddDirect" class="btn-seal" title="Scrivi direttamente il testo sulla pagina">
-                        ✍️ Scrivi di getto
+                    <button id="btnAddDirect" class="btn-seal" type="button" title="Scrivi direttamente il testo sulla pagina">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                            <path d="m15 5 4 4"/>
+                        </svg>
+                        <span>Scrivi di getto</span>
                     </button>
-                    <button id="btnGeminiWeave" class="btn-seal btn-seal-gemini" title="Invia a Gemini con il rituale e persona selezionata">
-                        ✨ Parla con Gemini
+                    
+                    <button id="btnGeminiWeave" class="btn-seal btn-seal-gemini" type="button" title="Invia a Gemini con il rituale e persona selezionata">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="m15 4-2 4 4-2-4-2Z"/>
+                            <path d="m20 9-1.5 2.5 2.5-1.5-2.5-1.5Z"/>
+                            <path d="m18 15-1.5 2.5 2.5-1.5-2.5-1.5Z"/>
+                            <path d="M4 20l10-10"/>
+                        </svg>
+                        <span>Parla con Gemini</span>
                     </button>
                 </div>
 
                 <div class="page-navigation-group">
-                    <button id="btnPrevPage" class="btn-nav-page" title="Pagina precedente">◀ Indietro</button>
-                    <span id="pageIndicator" style="font-family:var(--font-subhead); font-size:0.85rem; color:#d4af37; padding:0 4px;">1 / 1</span>
-                    <button id="btnNextPage" class="btn-nav-page" title="Pagina successiva">Avanti ▶</button>
-                    <button id="btnNewPage" class="btn-seal" style="background:#422615; border-color:#d4af37; padding:6px 12px;" title="Crea e volta a una nuova pagina intonsa">
-                        📖 Volta Pagina
+                    <button id="btnPrevPage" class="btn-nav-page" type="button" title="Pagina precedente" aria-label="Pagina precedente">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                    </button>
+                    
+                    <span id="pageIndicator" class="page-indicator-text" aria-live="polite">1 / 1</span>
+                    
+                    <button id="btnNextPage" class="btn-nav-page" type="button" title="Pagina successiva" aria-label="Pagina successiva">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </button>
+                    
+                    <button id="btnNewPage" class="btn-seal btn-seal-new-page" type="button" title="Crea e volta a una nuova pagina intonsa">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" x2="12" y1="8" y2="16"/>
+                            <line x1="8" x2="16" y1="12" y2="12"/>
+                        </svg>
+                        <span>Volta Pagina</span>
                     </button>
                 </div>
             </div>
@@ -201,31 +286,36 @@
     <!-- ==========================================================================
          MODALE 1: IMPOSTAZIONI GEMINI & RITUALI PERSONALIZZATI
          ========================================================================== -->
-    <div class="modal-backdrop" id="settingsModal">
+    <div class="modal-backdrop" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsModalTitle">
         <div class="modal-scroll">
             <div class="modal-header">
-                <h2 class="modal-title">⚙️ Connessione con Gemini & Rituali</h2>
-                <button class="btn-close-modal" title="Chiudi">&times;</button>
+                <h2 class="modal-title" id="settingsModalTitle">
+                    <svg class="inline-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    <span>Connessione Gemini & Rituali</span>
+                </h2>
+                <button class="btn-close-modal" type="button" title="Chiudi finestra" aria-label="Chiudi finestra">&times;</button>
             </div>
+            
             <div class="modal-body">
                 <div class="form-group">
-                    <label class="form-label" for="apiKeyInput">Chiave Arcana (Gemini API Key):</label>
-                    <input type="password" id="apiKeyInput" class="form-input" placeholder="Incolla qui la tua API Key di Google Gemini...">
+                    <label class="form-label" for="apiKeyInput">Chiave API Google Gemini:</label>
+                    <input type="password" id="apiKeyInput" class="form-input" placeholder="Incolla qui la tua API Key di Google Gemini..." autocomplete="off">
                     <div class="form-hint">
-                        Puoi ottenere una chiave gratuita in pochi secondi su <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#783b16; font-weight:bold; text-decoration:underline;">Google AI Studio</a>. La chiave rimane salvata solo nel tuo browser.
+                        Ottieni una chiave gratuita in pochi secondi su <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color:var(--mana-cyan); font-weight:600; text-decoration:underline;">Google AI Studio</a>. La chiave viene memorizzata esclusivamente in locale nel tuo browser.
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="modelSelect">Modello di Gemini:</label>
+                    <label class="form-label" for="modelSelect">Modello di Linguaggio:</label>
                     <select id="modelSelect" class="form-select">
-                        <option value="gemini-1.5-flash">Gemini 1.5 Flash (Veloce, creativo & gratuito)</option>
+                        <option value="gemini-1.5-flash">Gemini 1.5 Flash (Veloce, leggero & gratuito)</option>
                         <option value="gemini-2.0-flash">Gemini 2.0 Flash (Nuova generazione ultrarapida)</option>
                         <option value="gemini-1.5-pro">Gemini 1.5 Pro (Massima profondità e riflessione)</option>
                     </select>
                 </div>
-
-                <hr style="border:0; border-top:1px dashed #bda272; margin:6px 0;">
 
                 <div class="form-group">
                     <label class="form-label">Rituali & Spiriti Disponibili:</label>
@@ -234,43 +324,39 @@
                     </div>
                 </div>
 
-                <hr style="border:0; border-top:1px dashed #bda272; margin:6px 0;">
-
                 <!-- Crea Rituale Personalizzato -->
                 <div class="form-group">
                     <label class="form-label">Crea un Nuovo Rituale / Prompt Personalizzato:</label>
                     <input type="text" id="newPromptName" class="form-input" placeholder="Nome (es. Confidente Poetico, Filosofo Zen...)" style="margin-bottom:8px;">
-                    <textarea id="newPromptText" class="form-textarea" rows="3" placeholder="Istruzioni per Gemini (es: 'Sei il mio saggio consigliere, rispondi con una breve poesia in rima baciata e una parola di conforto...')"></textarea>
+                    <textarea id="newPromptText" class="form-textarea" rows="3" placeholder="Istruzioni per Gemini (es: 'Sei il mio saggio consigliere, rispondi con una breve poesia e un consiglio lucido...')"></textarea>
                     <div style="display:flex; justify-content:flex-end; margin-top:8px;">
-                        <button id="btnAddPrompt" class="btn-seal" style="padding:6px 14px; font-size:0.85rem;">
-                            ✨ Salva Nuovo Rituale
+                        <button id="btnAddPrompt" class="btn-seal" type="button" style="padding:6px 14px; font-size:0.85rem;">
+                            <span>Salva Rituale</span>
                         </button>
                     </div>
                 </div>
 
-                <hr style="border:0; border-top:1px dashed #bda272; margin:6px 0;">
-
-                <!-- Salvaguardia Memorie (Backup / Restore) -->
-                <div class="form-group">
-                    <label class="form-label">Custodia delle Memorie (Backup & Ripristino):</label>
+                <!-- Custodia delle Memorie (Backup & Ripristino) -->
+                <div class="form-group" style="border-top:1px solid rgba(139,92,246,0.2); padding-top:12px;">
+                    <label class="form-label">Custodia dei Dati (Backup & Ripristino):</label>
                     <div style="display:flex; gap:8px; flex-wrap:wrap;">
                         <button id="btnExportJson" class="btn-seal" style="font-size:0.8rem; padding:6px 12px;" type="button">
-                            💾 Esporta Diario (JSON)
+                            💾 Esporta JSON
                         </button>
                         <button id="btnExportMd" class="btn-seal" style="font-size:0.8rem; padding:6px 12px;" type="button">
-                            📜 Esporta in Markdown (.md)
+                            📜 Esporta Markdown
                         </button>
                         <button id="btnImportJson" class="btn-seal" style="font-size:0.8rem; padding:6px 12px;" type="button">
                             📥 Ripristina Backup
                         </button>
-                        <input type="file" id="importFileInput" accept=".json" style="display:none;">
+                        <input type="file" id="importFileInput" accept=".json" style="display:none;" aria-hidden="true">
                     </div>
-                    <div class="form-hint">I tuoi dati sono conservati sul tuo dispositivo. Esporta regolarmente una copia di sicurezza delle tue cronache.</div>
+                    <div class="form-hint">I tuoi dati sono conservati localmente sul dispositivo. Esporta regolarmente una copia di sicurezza.</div>
                 </div>
 
                 <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:10px;">
-                    <button id="btnSaveSettings" class="btn-seal" style="background:#28572b; border-color:#5ca862; padding:10px 20px;">
-                        ✓ Salva Impostazioni
+                    <button id="btnSaveSettings" class="btn-seal btn-seal-gemini" style="padding:10px 22px;" type="button">
+                        Salva Impostazioni
                     </button>
                 </div>
             </div>
@@ -280,26 +366,34 @@
     <!-- ==========================================================================
          MODALE 2: INDICE GENERALE DELLE MEMORIE
          ========================================================================== -->
-    <div class="modal-backdrop" id="indexModal">
+    <div class="modal-backdrop" id="indexModal" role="dialog" aria-modal="true" aria-labelledby="indexModalTitle">
         <div class="modal-scroll">
             <div class="modal-header">
-                <h2 class="modal-title">📜 Indice Generale del Grimorio</h2>
-                <button class="btn-close-modal" title="Chiudi">&times;</button>
+                <h2 class="modal-title" id="indexModalTitle">
+                    <svg class="inline-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 6h18"/>
+                        <path d="M7 12h10"/>
+                        <path d="M10 18h4"/>
+                    </svg>
+                    <span>Indice delle Memorie</span>
+                </h2>
+                <button class="btn-close-modal" type="button" title="Chiudi finestra" aria-label="Chiudi finestra">&times;</button>
             </div>
+            
             <div class="modal-body">
                 <div class="form-group">
-                    <input type="text" id="indexSearch" class="form-input" placeholder="🔍 Cerca tra le pagine, date, parole chiave o stati d'animo...">
+                    <input type="text" id="indexSearch" class="form-input" placeholder="Cerca tra le pagine, date, o stati d'animo..." aria-label="Cerca tra le pagine del diario">
                 </div>
 
                 <div class="prompt-list-container" id="indexTableList" style="max-height:380px;">
-                    <!-- Popolato dinamicamente -->
+                    <!-- Popolato dinamicamente da app.js -->
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Contenitore Notifiche Toast -->
-    <div class="toast-container" id="toastContainer"></div>
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
     <!-- Script modulari -->
     <script src="audio.js"></script>

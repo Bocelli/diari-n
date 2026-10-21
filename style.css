@@ -1,7 +1,101 @@
-/* ==========================================================================
-   IL GRIMORIO DELLE MEMORIE - STILE MODERN FANTASY & ASTRAL MAGITECH
-   Design System: Glassmorphism • Ethereal Neon • Champagne Gold • Mobile Ready
-   ========================================================================== */
+/* Icone Vettoriali e Accessibilità UI Pro Max */
+.ui-icon, .inline-icon {
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+    stroke: currentColor;
+}
+
+.inline-icon {
+    margin-right: 4px;
+}
+
+/* Accessibilità e Focus Ring Visibile (WCAG 2.2 AA) */
+button:focus-visible, 
+input:focus-visible, 
+select:focus-visible, 
+textarea:focus-visible {
+    outline: 2px solid var(--mana-cyan) !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.5) !important;
+}
+
+/* Micro-interazioni e feedback tattile stabile */
+.btn-header:active, 
+.btn-seal:active, 
+.btn-nav-page:active, 
+.mobile-tab-btn:active {
+    transform: scale(0.97) !important;
+    opacity: 0.9;
+}
+
+/* Target minimi di tocco (44x44px standard iOS/Android) */
+.btn-header {
+    min-height: 44px;
+}
+
+.btn-seal {
+    min-height: 44px;
+}
+
+.btn-nav-page {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-indicator-text {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--gold-champagne);
+    padding: 0 6px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+/* Scrollbar personalizzata sottile Dark Glass */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.35);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mana-cyan);
+}
+
+/* Supporto per utenti con ridotta tolleranza al movimento */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/* Ottimizzazione Header su schermi molto compatti (<600px) */
+@media (max-width: 600px) {
+    .btn-header-text {
+        display: none;
+    }
+
+    .btn-header {
+        padding: 8px 12px;
+        min-width: 44px;
+        justify-content: center;
+    }
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
